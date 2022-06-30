@@ -12,9 +12,6 @@ export default function Home() {
         <Button as={Col} variant="secondary" className="mx-2">
           Button #2
         </Button>
-        <Button as={Col} variant="danger">
-          Button #3
-        </Button>
       </Row>
     </div>
   );
