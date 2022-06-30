@@ -1,6 +1,6 @@
 import { Card } from "react-bootstrap";
-
-export default function GridItem() {
+import Link from "next/link";
+export default function GridItem({ post }) {
   return (
     <Card className={`fj-card`}>
       <div className="card-body-wrapper">
@@ -16,21 +16,20 @@ export default function GridItem() {
             <Card.Title className="font-weight-bold mb-1">
               Алтан Эрдэнэдалай
             </Card.Title>
-            <Card.Text className="card-date">2022 оны 06 сарын 30</Card.Text>
+            <Card.Text className="card-date">{post.date}</Card.Text>
           </div>
         </Card.Header>
-        <div className="view overlay">
-          <Card.Img
-            src="https://source.unsplash.com/user/erondu/250x250"
-            alt="Card image cap"
-          />
-        </div>
-        <Card.Body>
-          <Card.Title className="card-main-title">
-            Микросэрвис орчин үед
-          </Card.Title>
-          <Card.Text>Вэб технологи</Card.Text>
-        </Card.Body>
+        <Link href={`/${post.slug}`}>
+          <a>
+            <div className="view overlay">
+              <Card.Img src={post.image} alt="Card image cap" />
+            </div>
+            <Card.Body>
+              <Card.Title className="card-main-title">{post.title}</Card.Title>
+              <Card.Text>{post.subTitle}</Card.Text>
+            </Card.Body>
+          </a>
+        </Link>
       </div>
     </Card>
   );
