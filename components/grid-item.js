@@ -1,6 +1,6 @@
 import { Card } from "react-bootstrap";
 
-export default () => {
+export default function GridItem() {
   return (
     <Card className={`fj-card`}>
       <div className="card-body-wrapper">
@@ -34,4 +34,4 @@ export default () => {
       </div>
     </Card>
   );
-};
+}
