@@ -14,7 +14,9 @@
 
 # production
 /build
+/blog-sanity
 
+blog-sanity
 # misc
 .DS_Store
 *.pem
