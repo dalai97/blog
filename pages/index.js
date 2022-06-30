@@ -55,8 +55,6 @@ export default function Home() {
           <a href="#">нүүр</a>
           {" | "}
           <a href="#">сургалт</a>
-          {" | "}
-          <a href="#">фэйсбүүк</a>
         </div>
       </footer>
     </Container>
