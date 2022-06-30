@@ -25,8 +25,8 @@ export default function Home({ posts }) {
               <ListItem />
             </Col> */}
 
-            {posts.map((post) => (
-              <Col md="4">
+            {posts.map((post, index) => (
+              <Col key={index} md="4">
                 <GridItem post={post} />
               </Col>
             ))}
