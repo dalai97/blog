@@ -1,30 +1,20 @@
+import { useRouter } from "next/router";
 import { Row, Col } from "react-bootstrap";
 import Layout from "components/layout";
-import { getAllPosts, getPostBySlug, urlFor } from "lib/api";
+import { getPaginatedPost, getPostBySlug, urlFor } from "lib/api";
 import BlockContent from "@sanity/block-content-to-react";
 import Highlight from "components/highlight-code";
 import PostHeader from "components/post-header";
 export default function Posts({ post }) {
-  const serializers = {
-    types: {
-      code: (props) => (
-        <Highlight language={props.node.language}>
-          {props.node.code}
-          <div className="code-filename">{props.node.filename}</div>
-        </Highlight>
-      ),
-      image: (props) => (
-        <div>
-          <img
-            className={`blog-image blog-image-${props.node.position}`}
-            src={urlFor(props.node).height(400).url()}
-          />
-          <div className="code-filename">{props.node.alt}</div>
-        </div>
-      ),
-    },
-  };
-
+  const router = useRouter();
+  if (router.isFallback) {
+    return (
+      <Layout>
+        {" "}
+        <div>Уншиж байна</div>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <Row>
@@ -42,7 +32,25 @@ export default function Posts({ post }) {
     </Layout>
   );
 }
-
+const serializers = {
+  types: {
+    code: (props) => (
+      <Highlight language={props.node.language}>
+        {props.node.code}
+        <div className="code-filename">{props.node.filename}</div>
+      </Highlight>
+    ),
+    image: (props) => (
+      <div>
+        <img
+          className={`blog-image blog-image-${props.node.position}`}
+          src={urlFor(props.node).height(400).url()}
+        />
+        <div className="code-filename">{props.node.alt}</div>
+      </div>
+    ),
+  },
+};
 export const getStaticProps = async ({ params }) => {
   console.log("params2", params);
   const post = await getPostBySlug(params.slug);
@@ -55,7 +63,8 @@ export const getStaticProps = async ({ params }) => {
 };
 
 export const getStaticPaths = async () => {
-  const posts = await getAllPosts();
+  const posts = await getPaginatedPost(0, 2);
+
   const data = posts.map((post) => ({
     params: {
       slug: post.slug,
@@ -64,6 +73,6 @@ export const getStaticPaths = async () => {
   console.log("data2", data);
   return {
     paths: data,
-    fallback: false,
+    fallback: true,
   };
 };
