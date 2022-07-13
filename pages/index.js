@@ -1,5 +1,4 @@
-import { Row, Col } from "react-bootstrap";
-import useSWR from "swr";
+import { Row, Col, Button } from "react-bootstrap";
 
 import GridItem from "components/grid-item";
 import { getPaginatedPost } from "lib/api";
@@ -39,7 +38,7 @@ export default function Home({ posts }) {
       </Row>
       <div style={{ textAlign: "center" }}>
         {data && data[data.length - 1].length !== 0 && (
-          <button onClick={() => setSize(size + 1)}>Цааш үзэх</button>
+          <Button onClick={() => setSize(size + 1)}>Цааш үзэх</Button>
         )}
       </div>
     </Layout>
