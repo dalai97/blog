@@ -1,8 +1,23 @@
+import { useEffect } from "react";
 import { SWRConfig } from "swr";
 import "styles/index.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "highlight.js/styles/a11y-dark.css";
+import "nprogress/nprogress.css";
 import { ThemeProvider } from "context/theme-context";
+import { useRouter } from "next/router";
+import NProgress from "nprogress";
+
+// Router.onRouteChangeStart =
+
+// Router.onRouteChangeCompleted = (url) => {
+//   console.log(url + "userlee");
+//   NProgress.done();
+// };
+// Router.onRouteChangeError = (url) => {
+//   console.log(url + "userlee aldaa");
+//   NProgress.done();
+// };
 const fetcher = async (url) => {
   const res = await fetch(url);
 
@@ -19,10 +34,30 @@ const fetcher = async (url) => {
   return res.json();
 };
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+  useEffect(() => {
+    const handleStart = (url) => {
+      console.log(`Loading: ${url}`);
+      NProgress.start();
+    };
+    const handleStop = () => {
+      NProgress.done();
+    };
+
+    router.events.on("routeChangeStart", handleStart);
+    router.events.on("routeChangeComplete", handleStop);
+    router.events.on("routeChangeError", handleStop);
+
+    return () => {
+      router.events.off("routeChangeStart", handleStart);
+      router.events.off("routeChangeComplete", handleStop);
+      router.events.off("routeChangeError", handleStop);
+    };
+  }, [router]);
   return (
     <SWRConfig
       value={{
-        refreshInterval: 3000,
+        refreshInterval: 60000,
         fetcher,
         onError: (error, key) => {
           if (error.status !== 403 && error.status !== 404) {

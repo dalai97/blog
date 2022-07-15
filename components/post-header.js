@@ -1,18 +1,21 @@
 import { urlFor } from "lib/api";
 import moment from "moment";
+import "moment/locale/mn";
 
 const PostHeader = ({ post }) => {
+  moment.locale("mn");
   return (
     <div className="blog-detail-header">
       <p className="lead mb-0">
-        <img
-          src={urlFor(post.publisher.picture).height(50).url()}
-          className="rounded-circle mr-3"
-          height="50px"
-          width="50px"
-        />
-        {post.publisher.publisherName},{" "}
-        {moment(post.date).startOf("day").fromNow()}
+        {post.publisher && post.publisher.picture && (
+          <img
+            src={urlFor(post.publisher.picture).height(50).url()}
+            className="rounded-circle mr-3"
+            height="50px"
+            width="50px"
+          />
+        )}
+        {post.publisher.publisherName},{moment(post.date).format("LLL")}
       </p>
 
       <h1 className="font-weight-bold blog-detail-header-title mb-0">

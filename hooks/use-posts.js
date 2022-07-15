@@ -1,7 +1,7 @@
 import useSWR from "swr";
 export const usePosts = ({ posts }) => {
   const { data, error } = useSWR(`/api/posts`, {
-    initialData: posts,
+    fallbackData: posts,
     onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
       console.log("error try" + retryCount);
       // Never retry on 404.

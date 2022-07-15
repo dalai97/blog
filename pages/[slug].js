@@ -1,12 +1,28 @@
 import { useRouter } from "next/router";
 import { Row, Col } from "react-bootstrap";
 import Layout from "components/layout";
-import { getPaginatedPost, getPostBySlug, urlFor } from "lib/api";
+import {
+  getPaginatedPost,
+  getPostBySlug,
+  urlFor,
+  listenPostUpdate,
+} from "lib/api";
 import BlockContent from "@sanity/block-content-to-react";
 import Highlight from "components/highlight-code";
 import PostHeader from "components/post-header";
-export default function Posts({ post }) {
+import PreviewAlert from "components/preview-alert";
+import { useEffect, useState } from "react";
+export default function Posts({ post: initialPost, preview }) {
+  const [post, setPost] = useState(initialPost);
   const router = useRouter();
+  useEffect(() => {
+    const sub = listenPostUpdate(post.slug, (update) => {
+      console.log("update", update);
+      setPost(update.result);
+    });
+    return sub && sub.unsubscribe?.();
+  }, []);
+
   if (router.isFallback) {
     return (
       <Layout>
@@ -15,10 +31,19 @@ export default function Posts({ post }) {
       </Layout>
     );
   }
+  if (!router.isFallback && !post?.slug) {
+    return (
+      <Layout>
+        {" "}
+        <div>Уучлаарай ийм пост байхгүй байна</div>
+      </Layout>
+    );
+  }
   return (
     <Layout>
       <Row>
         <Col md="12">
+          {preview && <PreviewAlert></PreviewAlert>}
           {/* <pre>{JSON.stringify(post, null, 2)}</pre> */}
           <PostHeader post={post}></PostHeader>
           <br />
@@ -51,13 +76,19 @@ const serializers = {
     ),
   },
 };
-export const getStaticProps = async ({ params }) => {
+export const getStaticProps = async ({
+  params,
+  preview = false,
+  previewData,
+}) => {
+  console.log(preview, previewData);
   console.log("params2", params);
-  const post = await getPostBySlug(params.slug);
+  const post = await getPostBySlug(params.slug, preview);
   console.log("post1", post);
   return {
     props: {
-      post: post[0],
+      post: post.length > 1 ? post[1] : post.length > 0 ? post[0] : {},
+      preview,
     },
   };
 };
