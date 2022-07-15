@@ -8,16 +8,13 @@ export default function Intro() {
         width={64}
         height={64}
         className="mr-3"
-        src="logo.jpg"
+        src="profile.jpeg"
         alt="Generic placeholder"
       />
       <Card.Body>
-        <h4 className="font-weight-bold mb-1">
-          1234.mn - Онлайн видео сургалт
-        </h4>
+        <h4 className="font-weight-bold mb-1">МАРЖААХАЙ БЛОГ</h4>
         <p className="card-date">
-          Бид програмчлалын технолгийн чиглэлээр төрөл бүрийн сонирхолтой
-          мэдээллүүдийг энэхүү блогоор хүргэж байна.
+          Төрөл бүрийн сонирхолтой мэдээллүүдийг энэхүү блогоор хүргэж байна.
         </p>
       </Card.Body>
     </div>

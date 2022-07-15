@@ -23,7 +23,7 @@ export default function MyNavbar() {
                 color: theme.fontColor,
               }}
             >
-              1234 БЛОГ
+              Маржаахай
             </a>
           </Link>
         </Navbar.Brand>
