@@ -17,7 +17,6 @@ export default function Posts({ post: initialPost, preview }) {
   const router = useRouter();
   useEffect(() => {
     const sub = listenPostUpdate(post.slug, (update) => {
-      console.log("update", update);
       setPost(update.result);
     });
     return sub && sub.unsubscribe?.();
