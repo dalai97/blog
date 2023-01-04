@@ -1,12 +1,6 @@
 // tsconfig.json or jsconfig.json
 {
     "compilerOptions": {
-        "target": "es6",
-        "removeComments": false,
-        "jsx": "react",
-        "moduleResolution": "node"
-      },
-      "include": [
-        "src"
-      ]
+        "baseUrl": "."
+    }
 }

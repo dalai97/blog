@@ -11,7 +11,7 @@ import PreviewAlert from "components/preview-alert";
 const PAGE_LIMIT = 2;
 export default function Home({ posts, preview }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
-    (index) => `/api/posts?page=${index}&limit=${PAGE_LIMIT}`,
+    (index) => `/api/posts?page=${index}&limit=${6}`,
     { fallbackData: [posts] }
   );
   // const { data, isLoading, error } = usePosts(posts);
@@ -59,6 +59,5 @@ export const getStaticProps = async ({ preview = false }) => {
       posts,
       preview,
     },
-    revalidate: 10,
   };
 };

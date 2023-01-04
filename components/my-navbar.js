@@ -2,8 +2,6 @@ import { useTheme } from "hooks/use-theme";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import Link from "next/link";
 import Switch from "react-switch";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 export default function MyNavbar() {
   const { theme, toggleTheme } = useTheme();
   return (
@@ -51,7 +49,7 @@ export default function MyNavbar() {
                       paddingRight: 2,
                     }}
                   >
-                    <FontAwesomeIcon inverse icon={faSun} />
+                    {/* <FontAwesomeIcon inverse icon={faSun} /> */}
                   </div>
                 }
                 checkedIcon={
@@ -68,7 +66,7 @@ export default function MyNavbar() {
                       paddingRight: 2,
                     }}
                   >
-                    <FontAwesomeIcon icon={faMoon} />
+                    {/* <FontAwesomeIcon icon={faMoon} /> */}
                   </div>
                 }
               />

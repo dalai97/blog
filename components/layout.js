@@ -10,13 +10,13 @@ export default function Layout({ children }) {
         <MyNavbar />
         <div className="blog-detail-page">
           <div className={`page-wrapper`}>{children}</div>
-          <footer className="page-footer">
+          {/* <footer className="page-footer">
             <div>
               <a href="#">нүүр</a>
               {" | "}
               <a href="#">сургалт</a>
             </div>
-          </footer>
+          </footer> */}
         </div>
       </Container>
       <style jsx global>
