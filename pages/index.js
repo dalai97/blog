@@ -8,7 +8,7 @@ import Intro from "components/intro";
 import useSWRInfinite from "swr/infinite";
 import PreviewAlert from "components/preview-alert";
 
-const PAGE_LIMIT = 2;
+const PAGE_LIMIT = 6;
 export default function Home({ posts, preview }) {
   const { data, size, setSize, isValidating } = useSWRInfinite(
     (index) => `/api/posts?page=${index}&limit=${6}`,
@@ -32,7 +32,7 @@ export default function Home({ posts, preview }) {
       <Row className="mb-5">
         {data.map((page, index) =>
           page.map((post, key) => (
-            <Col key={index + key} md={12 / PAGE_LIMIT}>
+            <Col key={index + key} md={12 / 2}>
               <GridItem post={post} />
             </Col>
           ))
