@@ -32,7 +32,7 @@ export default function Home({ posts, preview }) {
       <Row className="mb-5">
         {data.map((page, index) =>
           page.map((post, key) => (
-            <Col key={index + key} md={12 / 2}>
+            <Col key={index + key} md={12 / 3}>
               <GridItem post={post} />
             </Col>
           ))

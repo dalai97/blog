@@ -26,7 +26,8 @@ const PostHeader = ({ post }) => {
 
       <img
         className="img-fluid rounded"
-        src={urlFor(post.cover_image).height(800).url()}
+        style={{ width: "100%", height: 400 }}
+        src={urlFor(post.cover_image).height(400).url()}
         alt={post.cover_image.alt}
       />
       <div className="code-filename" style={{ textAlign: "center" }}>
